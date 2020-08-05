@@ -1,36 +1,55 @@
 <template>
   <div class="module-goodlist-wrapper">
+    <van-checkbox-group v-model="checkGoods">
     <template v-for="(good, index) in goodList">
       <van-card
         :key="index"
         :num="good.num"
-        :price="good.price"
-        :desc="good.desc"
         :title="good.title"
+        :price="good.price"
         :thumb="good.thumb"
       >
         <template #tags>
-          <van-tag plain type="danger">特价</van-tag>
-          <van-tag plain type="danger">热销</van-tag>
+          <van-tag type="danger" v-if="good.active">{{good.active}}</van-tag>
+        </template>
+        <template #desc>
+          ¥ {{good.price}}
+        </template>
+        <template #price>
+          月销&nbsp;{{good.num}}&nbsp;点赞&nbsp;{{good.up}}
+        </template>
+        <template #origin-price>
+            
+        </template>
+        <template #num>
+          
         </template>
         <template #footer>
-          <van-checkbox v-model="good.checked" 
+          <van-checkbox :name="good.key" v-if="good.checked !== undefined"
           checked-color="#FFBA1E" shape="square" icon-size="16px"></van-checkbox>
         </template>
       </van-card>
     </template>
+    </van-checkbox-group>
   </div>
 </template>
 <script>
-import goodList from "../../store/goodlist.js";
 
 export default {
   name: 'GoodList',
   data() {
     return {
-      goodList: goodList,
+      checkGoods: ['001001']
     }
   },
+  props: {
+    goodList: Array,
+    default: () => []
+  },
+  computed: {
+  },
+  methods: {
+  }
   
 }
 </script>

@@ -5,19 +5,38 @@
       :key="index">
         <template #title>
           <span class="custom-title">{{menu.title}}</span>
-          <van-tag type="danger">{{ menu.type }}</van-tag>
         </template>
         <van-cell >
           <template #default>
             <template v-for="(good, _index) in menu.goodList">
-              <van-card
-                :key="_index"
-                :title="good.title"
-                :thumb="good.thumb"
-              >
+             <van-card
+              :key="_index"
+              :num="good.num"
+              :price="good.price"
+              :title="good.title"
+              :origin-price="good.origin_price"
+              :thumb="good.thumb"
+            >
+                <template #title>
+                  {{good.title}} <van-tag plain type="danger" v-if="good.exist">本店已存在</van-tag>
+                </template>
                 <template #tags>
-                  <van-tag plain type="danger">特价</van-tag>
-                  <van-tag plain type="danger">热销</van-tag>
+                  <van-tag type="danger" v-if="good.active">{{good.active}}</van-tag>
+                </template>
+                <template #desc>
+                  <van-radio-group v-model="good.selected_price">
+                    <van-radio :name="1" icon-size="1rem" checked-color="#FFBA1E">智能价&nbsp;¥&nbsp;{{good.price}}</van-radio>
+                    <van-radio :name="0" icon-size="1rem" checked-color="#FFBA1E">原价&nbsp;¥&nbsp;{{good.origin_price}}</van-radio>
+                  </van-radio-group>
+                </template>
+                <template #price>
+                  月销&nbsp;{{good.num}}&nbsp;点赞&nbsp;{{good.up}}
+                </template>
+                <template #origin-price>
+                   
+                </template>
+                <template #num>
+                  
                 </template>
                 <template #footer>
                   <van-checkbox v-model="good.checked" 
@@ -32,15 +51,18 @@
   </div>
 </template>
 <script>
-import menuList from "../../store/menulist.js";
-
 export default {
   name: 'MenuList',
   data() {
     return {
-      menuList: menuList,
     }
   },
+  props: {
+    menuList: {
+      type: Array,
+      defaut: () => []
+    }
+  }
   
 }
 </script>

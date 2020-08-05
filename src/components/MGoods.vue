@@ -6,22 +6,25 @@
       :next-text="nextText"
       @clickLeft="handleClickLeft"
       @clickRight="handleClickRight"  />
-    <MenuList />
+    <MenuList :menuList="menuList"/>
+    <van-button type="primary" to="agoods" block style="position: fixed; bottom: 0;" color="#FFBA1E">下一步</van-button>
   </div>
 </template>
 
 <script>
 import Nav from './nav/Nav.vue'
 import MenuList from './menu/MenuList.vue';
+import matchmenu from "../store/matchmenu.js";
 
 export default {
   name: 'Menu',
   components: {  Nav, MenuList },
   data() {
     return {
-      title: '智能菜单',
+      title: '套餐匹配',
       backText: '返回',
-      nextText: '下一步'
+      nextText: '下一步',
+      menuList: matchmenu
     }
   },
   props: {

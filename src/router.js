@@ -2,20 +2,37 @@ import Vue from 'vue';
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
-import Home from './components/Home.vue';
-import Menu from './components/Menu.vue';
+import Goods from './components/Goods.vue';
+import TGoods from './components/TGoods.vue';
+import MGoods from './components/MGoods.vue';
+import AGoods from './components/AGoods.vue';
+import NewGoods from './components/NewGoods.vue';
+import Over from './components/Over.vue';
+
 
 
 const routes = [{
     path: '/',
-    redirect: '/home'
+    redirect: '/goods'
   },{
-    path: '/home',
-    component: Home
+    path: '/goods', // 本店菜单
+    component: Goods
   },
   {
-    path: '/menu',
-    component: Menu
+    path: '/tgoods', // 优选单品
+    component: TGoods
+  },{
+    path: '/mgoods', // 套餐匹配
+    component: MGoods
+  },{
+    path: '/agoods', // 智能活动
+    component: AGoods
+  },{
+    path: '/newGoods', // 优选菜单
+    component: NewGoods
+  },{
+    path: '/over', // 优选菜单
+    component: Over
   }
 ]
 
